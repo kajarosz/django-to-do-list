@@ -1,0 +1,12 @@
+{% extends 'todolist/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <h1>Your task lists:</h1>
+    <ul>
+        {% for list in object_list %}
+        <p><a href="/list/{{list.id}}">{{list}}</a></p>
+        {% endfor %}
+    </ul>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'todolist/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+<divclass="container">
+    <h1>Are you sure you want to delete {{tasklist}} task list?</h1>
+</div>
+<div class="container"><form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Confirm">
+</form></div>
+{% endblock content %}

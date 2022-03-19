@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .models import TaskList, Task
 from .forms import TaskForm
 from django.urls import reverse_lazy, reverse
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, DeleteView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, DeleteView, FormView
 
 # Create your views here.
 
@@ -21,7 +21,9 @@ class TaskListListView(ListView):
 
 class TaskListDetailView(DetailView):
     model = TaskList
-    extra_context={'tasks': Task.objects.all()}
+
+    def tasks(self):
+        return Task.objects.all()
 
 class TaskListDeleteView(DeleteView):
     model = TaskList
@@ -40,11 +42,24 @@ def addtask(request, pk):
         form = TaskForm()
     return render(request, 'todolist/task_form.html', context={'form':form})
 
+'''class TaskFormView(FormView):
+    form_class = TaskForm
+    success_url = reverse_lazy('todolist:lists')
+    template_name = 'todolist/task_form.html'
+
+    def form_valid(self, form):
+
+        return super().form_valid(form)
+    
+    def get_queryset(self):
+        tasklist_id = self.kwargs['pk']
+        return tasklist_id'''
+
 class TaskDetailView(DetailView):
     model = Task
 
 class TaskDeleteView(DeleteView):
     model = Task
-    success_url = reverse_lazy('todolist:lists')
-
-
+    tasklist_id = model.tasklist
+    success_url = reverse_lazy(f'todolist:lists')
+ 

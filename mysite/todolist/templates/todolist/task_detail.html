@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>{{task}}</h1>
-    <p><a href="/task/{{task.id}}/delete">Delete task</a></p>
+    <p><a href="/list/{{task.tasklist_id}}/task/{{task.id}}/delete">Delete task</a></p>
     <div>
         <h4>Deadline:</h4>
         <p>{{task.deadline_date}}</p>

@@ -8,9 +8,9 @@
     <p><a href="/list/{{tasklist.id}}/delete">Delete task list</a></p>
     <div>
         <ul>
-            {% for task in tasks %}
+            {% for task in view.tasks %}
                 {% if task.tasklist_id == tasklist.id %}
-                    <li><a href="/task/{{task.id}}">{{task}}<a></li>
+                    <li><a href="/list/{{tasklist.id}}/task/{{task.id}}">{{task}}<a></li>
                 {% endif %}
             {% endfor %}
         </ul>
